@@ -1,0 +1,62 @@
+===== Criando ambiente stress100 =====
+[+] CPU=1000000 MEM=512MB CMD=stress --cpu 1
+[+] Ambiente stress100 criado com PID 8760
+[+] Log: /home/vagrant/projeto2/logs/stress100.log
+1
+stress: info: [1] dispatching hogs: 1 cpu, 0 io, 0 vm, 0 hdd
+===== Encerrando ambiente stress100 =====
+[+] Encerrando processo principal PID=8760 e toda a árvore
+[+] Matando PIDs: 8760
+8763
+8766
+8770
+===== Criando ambiente stress100 =====
+[+] CPU=1000000 MEM=512MB CMD=stress --cpu 2
+[+] Ambiente stress100 criado com PID 9220
+[+] Log: /home/vagrant/projeto2/logs/stress100.log
+1
+stress: info: [1] dispatching hogs: 2 cpu, 0 io, 0 vm, 0 hdd
+===== Encerrando ambiente stress100 =====
+[+] Encerrando processo principal PID=9220 e toda a árvore
+[+] Matando PIDs: 9220
+9225
+9226
+9230
+9231
+===== Criando ambiente stress100 =====
+[+] CPU=1000000 MEM=512MB CMD=stress --cpu 1
+[+] Ambiente stress100 criado com PID 9544
+[+] Log: /home/vagrant/projeto2/logs/stress100.log
+1
+stress: info: [1] dispatching hogs: 1 cpu, 0 io, 0 vm, 0 hdd
+===== Encerrando ambiente stress100 =====
+[+] Encerrando processo principal PID=9544 e toda a árvore
+[+] Matando PIDs: 9544
+9549
+9550
+9555
+===== Criando ambiente stress100 =====
+[+] CPU=1000000 MEM=512MB CMD=stress --cpu 2
+[+] Ambiente stress100 criado com PID 9690
+[+] Log: /home/vagrant/projeto2/logs/stress100.log
+1
+stress: info: [1] dispatching hogs: 2 cpu, 0 io, 0 vm, 0 hdd
+===== Encerrando ambiente stress100 =====
+[+] Encerrando processo principal PID=9690 e toda a árvore
+[+] Matando PIDs: 9690
+9695
+9696
+9700
+9701
+===== Criando ambiente stress100 =====
+[+] CPU=1000000 MEM=512MB CMD=stress --cpu 1
+[+] Ambiente stress100 criado com PID 10092
+[+] Log: /home/vagrant/projeto2/logs/stress100.log
+1
+stress: info: [1] dispatching hogs: 1 cpu, 0 io, 0 vm, 0 hdd
+===== Criando ambiente stress100 =====
+[+] CPU=1000000 MEM=512MB CMD=stress --cpu 1
+[+] Ambiente stress100 criado com PID 10142
+[+] Log: /home/vagrant/projeto2/logs/stress100.log
+1
+stress: info: [1] dispatching hogs: 1 cpu, 0 io, 0 vm, 0 hdd

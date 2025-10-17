@@ -1,0 +1,12 @@
+===== Criando ambiente stress50 =====
+[+] CPU=500000 MEM=512MB CMD=stress --cpu 1
+[+] Ambiente stress50 criado com PID 8583
+[+] Log: /home/vagrant/projeto2/logs/stress50.log
+1
+stress: info: [1] dispatching hogs: 1 cpu, 0 io, 0 vm, 0 hdd
+===== Encerrando ambiente stress50 =====
+[+] Encerrando processo principal PID=8583 e toda a árvore
+[+] Matando PIDs: 8583
+8588
+8589
+8593

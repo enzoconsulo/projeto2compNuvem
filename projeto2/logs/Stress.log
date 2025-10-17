@@ -1,0 +1,140 @@
+===== Encerrando ambiente stress =====
+[+] Encerrando processo principal PID=2135 e toda a árvore
+[+] Matando PIDs: 2135
+2138
+2142
+2145
+2146
+===== Criando ambiente stress =====
+[+] CPU=200000 MEM=512MB CMD=stress --cpu 2
+[+] Ambiente stress criado com PID 2197
+[+] Log: /home/vagrant/projeto2/logs/stress.log
+stress: info: [1] dispatching hogs: 2 cpu, 0 io, 0 vm, 0 hdd
+===== Encerrando ambiente stress =====
+[+] Encerrando processo principal PID=2197 e toda a árvore
+[+] Matando PIDs: 2197
+2201
+2204
+2207
+2208
+===== Criando ambiente stress =====
+[+] CPU=200000 MEM=512MB CMD=stress --cpu 2
+[+] Ambiente stress criado com PID 2455
+stress: info: [1] dispatching hogs: 2 cpu, 0 io, 0 vm, 0 hdd
+[+] Log: /home/vagrant/projeto2/logs/stress.log
+===== Encerrando ambiente stress =====
+[+] Encerrando processo principal PID=2455 e toda a árvore
+===== Criando ambiente stress =====
+[+] CPU=200000 MEM=512MB CMD=stress --cpu 2
+[+] Ambiente stress criado com PID 2568
+stress: info: [1] dispatching hogs: 2 cpu, 0 io, 0 vm, 0 hdd
+[+] Log: /home/vagrant/projeto2/logs/stress.log
+===== Encerrando ambiente stress =====
+[+] Encerrando processo principal PID=2568 e toda a árvore
+[+] Matando PIDs: 2568
+2571
+2575
+2578
+2579
+===== Criando ambiente stress =====
+[+] CPU=200000 MEM=512MB CMD=stress --cpu 2
+[+] Ambiente stress criado com PID 2622
+[+] Log: /home/vagrant/projeto2/logs/stress.log
+stress: info: [1] dispatching hogs: 2 cpu, 0 io, 0 vm, 0 hdd
+===== Encerrando ambiente stress =====
+[+] Encerrando processo principal PID=2622 e toda a árvore
+[+] Matando PIDs: 2622
+2626
+2630
+2632
+2633
+===== Criando ambiente stress =====
+[+] CPU=200000 MEM=512MB CMD=stress --cpu 2
+[+] Ambiente stress criado com PID 2674
+[+] Log: /home/vagrant/projeto2/logs/stress.log
+stress: info: [1] dispatching hogs: 2 cpu, 0 io, 0 vm, 0 hdd
+===== Criando ambiente stress =====
+[+] CPU=200000 MEM=512MB CMD=stress --cpu 2
+[+] Ambiente stress criado com PID 2751
+stress: info: [1] dispatching hogs: 2 cpu, 0 io, 0 vm, 0 hdd
+[+] Log: /home/vagrant/projeto2/logs/stress.log
+===== Encerrando ambiente stress =====
+[+] Encerrando processo principal PID=2751 e toda a árvore
+[+] Matando PIDs: 2751
+2754
+2758
+2761
+2762
+===== Criando ambiente stress =====
+[+] CPU=200000 MEM=512MB CMD=stress --cpu 2
+[+] Ambiente stress criado com PID 2942
+stress: info: [1] dispatching hogs: 2 cpu, 0 io, 0 vm, 0 hdd
+[+] Log: /home/vagrant/projeto2/logs/stress.log
+===== Encerrando ambiente stress =====
+[+] Encerrando processo principal PID=2942 e toda a árvore
+[+] Matando PIDs: 2942
+2946
+2949
+2952
+2953
+===== Encerrando ambiente stress =====
+[!] Nenhum arquivo de PID encontrado.
+===== Criando ambiente stress =====
+[+] CPU=200000 MEM=512MB CMD=stress --cpu 2
+[+] Ambiente stress criado com PID 3564
+stress: info: [1] dispatching hogs: 2 cpu, 0 io, 0 vm, 0 hdd
+[+] Log: /home/vagrant/projeto2/logs/stress.log
+===== Encerrando ambiente stress =====
+[+] Encerrando processo principal PID=3564 e toda a árvore
+[+] Matando PIDs: 3564
+3568
+3571
+3574
+3575
+===== Criando ambiente stress =====
+[+] CPU=200000 MEM=512MB CMD=stress --cpu 2
+[+] Ambiente stress criado com PID 3775
+[+] Log: /home/vagrant/projeto2/logs/stress.log
+stress: info: [1] dispatching hogs: 2 cpu, 0 io, 0 vm, 0 hdd
+===== Encerrando ambiente stress =====
+[+] Encerrando processo principal PID=3775 e toda a árvore
+[+] Matando PIDs: 3775
+3779
+3782
+3785
+3786
+===== Criando ambiente stress =====
+[+] CPU=200000 MEM=512MB CMD=stress --cpu 2
+[+] Ambiente stress criado com PID 4336
+stress: info: [1] dispatching hogs: 2 cpu, 0 io, 0 vm, 0 hdd
+[+] Log: /home/vagrant/projeto2/logs/stress.log
+===== Encerrando ambiente stress =====
+[+] Encerrando processo principal PID=4336 e toda a árvore
+[+] Matando PIDs: 4336
+4339
+4341
+4346
+4347
+===== Criando ambiente stress =====
+[+] CPU=200000 MEM=512MB CMD=stress --cpu 1
+[+] Ambiente stress criado com PID 4534
+stress: info: [1] dispatching hogs: 1 cpu, 0 io, 0 vm, 0 hdd
+[+] Log: /home/vagrant/projeto2/logs/stress.log
+===== Encerrando ambiente stress =====
+[+] Encerrando processo principal PID=4534 e toda a árvore
+[+] Matando PIDs: 4534
+4537
+4541
+4544
+===== Criando ambiente stress =====
+[+] CPU=200000 MEM=512MB CMD=stress --cpu 1
+[+] Ambiente stress criado com PID 5186
+[+] Log: /home/vagrant/projeto2/logs/stress.log
+1
+stress: info: [1] dispatching hogs: 1 cpu, 0 io, 0 vm, 0 hdd
+===== Encerrando ambiente stress =====
+[+] Encerrando processo principal PID=5186 e toda a árvore
+[+] Matando PIDs: 5186
+5191
+5192
+5196

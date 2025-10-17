@@ -1,0 +1,12 @@
+===== Criando ambiente Visão Geral =====
+[+] CPU=100000 MEM=512MB CMD=stress --cpu 2
+stress: info: [1] dispatching hogs: 2 cpu, 0 io, 0 vm, 0 hdd
+[+] Ambiente Visão Geral criado com PID 3006
+[+] Log: /home/vagrant/projeto2/logs/Visão Geral.log
+[+] Encerrando processo principal PID=3006 e toda a árvore
+[+] Matando PIDs: 3006
+3010
+3011
+3014
+3015
+[!] Nenhum arquivo de PID encontrado.

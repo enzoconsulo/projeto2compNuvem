@@ -1,0 +1,11 @@
+===== Criando ambiente 111 =====
+[+] CPU=200000 MEM=512MB CMD=stress --cpu 1
+stress: info: [1] dispatching hogs: 1 cpu, 0 io, 0 vm, 0 hdd
+[+] Ambiente 111 criado com PID 3306
+[+] Log: /home/vagrant/projeto2/logs/111.log
+===== Encerrando ambiente 111 =====
+[+] Encerrando processo principal PID=3306 e toda a árvore
+[+] Matando PIDs: 3306
+3310
+3311
+3314

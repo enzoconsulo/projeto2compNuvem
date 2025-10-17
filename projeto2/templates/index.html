@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Ambiente</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>🧱 Criar Novo Ambiente</h1>
+    <form action="/create" method="post">
+        <label>Nome do ambiente:</label><br>
+        <input type="text" name="name" required><br><br>
+
+        <label>Limite de CPU (microsegundos por segundo):</label><br>
+        <input type="text" name="cpu" value="200000"><br><br>
+
+        <label>Limite de Memória (MB):</label><br>
+        <input type="text" name="mem" value="512"><br><br>
+
+        <label>Comando a executar:</label><br>
+        <input type="text" name="command" value="sleep 60"><br><br>
+
+        <button type="submit">Criar</button>
+    </form>
+    <br>
+    <a href="/list">Ver ambientes</a>
+</body>
+</html>

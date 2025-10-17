@@ -1,0 +1,20 @@
+===== Criando ambiente stress20 =====
+[+] CPU=200000 MEM=512MB CMD=stress --cpu 1
+[+] Ambiente stress20 criado com PID 8239
+[+] Log: /home/vagrant/projeto2/logs/stress20.log
+1
+stress: info: [1] dispatching hogs: 1 cpu, 0 io, 0 vm, 0 hdd
+===== Criando ambiente stress20 =====
+[+] CPU=200000 MEM=512MB CMD=stress --cpu 1
+[+] Ambiente stress20 criado com PID 8271
+[+] Log: /home/vagrant/projeto2/logs/stress20.log
+1
+stress: info: [1] dispatching hogs: 1 cpu, 0 io, 0 vm, 0 hdd
+===== Encerrando ambiente stress20 =====
+[+] Encerrando processo principal PID=8271 e toda a árvore
+[+] Matando PIDs: 8271
+8276
+8277
+8281
+===== Encerrando ambiente stress20 =====
+[!] Nenhum arquivo de PID encontrado.
