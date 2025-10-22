@@ -11,43 +11,98 @@ Vagrant.configure("2") do |config|
   end
 
   # --- Rede ---
-  # Porta 8080 do host → 5000 da VM (Flask)
-  config.vm.network "forwarded_port", guest: 5000, host: 8080, auto_correct: true
+  # Agora o host:8080 -> guest:80 (Apache)
+  config.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
 
   # --- Pasta sincronizada ---
-  # A pasta do projeto (no seu computador) será montada dentro da VM
   config.vm.synced_folder "./projeto2", "/home/vagrant/projeto2"
 
   # --- Provisionamento automático ---
   config.vm.provision "shell", inline: <<-SHELL
+    set -e
     echo "=== Atualizando pacotes ==="
     apt-get update -y
+    DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 
-    echo "=== Instalando Python e Flask ==="
-    apt-get install -y python3 python3-pip git
-    pip3 install flask
+    echo "=== Instalando pacotes necessários ==="
+    apt-get install -y python3 python3-venv python3-pip git apache2 libapache2-mod-proxy-html \
+      libapache2-mod-wsgi-py3 build-essential
 
-    echo "=== Criando serviço systemd para o Flask ==="
-    cat <<EOF > /etc/systemd/system/flaskapp.service
+    # módulos apache a habilitar mais tarde
+    a2enmod proxy proxy_http headers rewrite
+
+    # criar virtualenv como usuário vagrant
+    if [ ! -d /home/vagrant/venv ]; then
+      echo "=== Criando virtualenv em /home/vagrant/venv ==="
+      sudo -u vagrant -H python3 -m venv /home/vagrant/venv
+    fi
+
+    # instalar dependências no venv (usar requirements.txt se existir)
+    if [ -f /home/vagrant/projeto2/requirements.txt ]; then
+      echo "=== Instalando dependências do requirements.txt ==="
+      sudo -u vagrant -H /home/vagrant/venv/bin/pip install --upgrade pip
+      sudo -u vagrant -H /home/vagrant/venv/bin/pip install -r /home/vagrant/projeto2/requirements.txt
+    else
+      echo "=== requirements.txt não encontrado. Instalando Flask e Gunicorn ==="
+      sudo -u vagrant -H /home/vagrant/venv/bin/pip install --upgrade pip
+      sudo -u vagrant -H /home/vagrant/venv/bin/pip install flask gunicorn
+    fi
+
+    # Criar systemd unit para gunicorn (assume app.py com app = Flask(...))
+    cat > /etc/systemd/system/gunicorn-projeto2.service <<EOF
 [Unit]
-Description=Flask App
+Description=Gunicorn instance for projeto2
 After=network.target
 
 [Service]
 User=vagrant
+Group=www-data
 WorkingDirectory=/home/vagrant/projeto2
-ExecStart=/usr/bin/python3 /home/vagrant/projeto2/app.py
+Environment="PATH=/home/vagrant/venv/bin"
+ExecStart=/home/vagrant/venv/bin/gunicorn --workers 3 --bind 127.0.0.1:8000 app:app
+
 Restart=always
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
-    echo "=== Habilitando serviço Flask ==="
+    echo "=== Recarregando systemd e iniciando gunicorn ==="
     systemctl daemon-reload
-    systemctl enable flaskapp
-    systemctl start flaskapp
+    systemctl enable gunicorn-projeto2
+    systemctl restart gunicorn-projeto2
 
-    echo "=== Tudo pronto! Acesse em: http://localhost:8080 ==="
+    # Configurar Apache como reverse proxy
+    APACHE_SITE=/etc/apache2/sites-available/projeto2.conf
+
+    cat > $APACHE_SITE <<EOF
+<VirtualHost *:80>
+    ServerName projeto2
+
+    # Proxy para gunicorn (aplicacao Python)
+    ProxyPreserveHost On
+    ProxyPass / http://127.0.0.1:8000/
+    ProxyPassReverse / http://127.0.0.1:8000/
+
+    # Se tiver pasta de estáticos no Flask: /home/vagrant/projeto2/static
+    Alias /static /home/vagrant/projeto2/static
+    <Directory /home/vagrant/projeto2/static>
+        Require all granted
+        Options Indexes FollowSymLinks
+    </Directory>
+
+    ErrorLog \${APACHE_LOG_DIR}/projeto2_error.log
+    CustomLog \${APACHE_LOG_DIR}/projeto2_access.log combined
+</VirtualHost>
+EOF
+
+    a2ensite projeto2.conf
+    a2dissite 000-default.conf || true
+
+    echo "=== Reiniciando Apache ==="
+    systemctl restart apache2
+
+    echo "=== Provisionamento finalizado ==="
+    echo "Acesse a aplicação em http://localhost:8080"
   SHELL
 end
