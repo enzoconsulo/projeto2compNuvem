@@ -104,6 +104,26 @@ def restart_env(env_name):
 
     return redirect(url_for('list_envs'))
 
+@app.route('/delete/<env_name>')
+def delete_env(env_name):
+    import sqlite3
+    import os
+
+    conn = sqlite3.connect('envs.db')
+    cursor = conn.cursor()
+
+    # Exclui o ambiente do banco
+    cursor.execute("DELETE FROM envs WHERE name = ?", (env_name,))
+    conn.commit()
+    conn.close()
+
+    # Remove possíveis logs associados
+    log_path = f'logs/{env_name}.log'
+    if os.path.exists(log_path):
+        os.remove(log_path)
+
+    return redirect(url_for('list_envs'))
+
 @app.route('/top')
 def get_top():
     try:

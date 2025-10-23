@@ -5945,3 +5945,75 @@ Traceback (most recent call last):
     from flask import Flask, render_template, request, redirect, url_for, abort, escape
 ImportError: cannot import name 'escape' from 'flask' (/home/vagrant/venv/lib/python3.10/site-packages/flask/__init__.py)
 [2025-10-23 16:41:10 +0000] [2092] [INFO] Worker exiting (pid: 2092)
+[2025-10-23 16:57:29 +0000] [2378] [INFO] Starting gunicorn 23.0.0
+[2025-10-23 16:57:29 +0000] [2378] [INFO] Listening at: http://127.0.0.1:8000 (2378)
+[2025-10-23 16:57:29 +0000] [2378] [INFO] Using worker: sync
+[2025-10-23 16:57:29 +0000] [2379] [INFO] Booting worker with pid: 2379
+[2025-10-23 16:57:29 +0000] [2380] [INFO] Booting worker with pid: 2380
+[2025-10-23 16:57:29 +0000] [2381] [INFO] Booting worker with pid: 2381
+[2025-10-23 16:57:52,802] ERROR in app: Exception on /create [POST]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 39, in create
+    subprocess.run(["bash", f"{SCRIPT_DIR}/create_env.sh", name, cpu, mem, command, log_path])
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 16:58:45,718] ERROR in app: Exception on /list [GET]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 62, in list_envs
+    return render_template('list.html', envs=rows, top_output=top_output)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/vagrant/projeto2/templates/list.html", line 59, in top-level template code
+    <a href="{{ url_for('delete_env', env_name=env[1]) }}"
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1121, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1110, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+  File "/home/vagrant/venv/lib/python3.10/site-packages/werkzeug/routing/map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'delete_env' with values ['env_name']. Did you mean 'list_envs' instead?
+[2025-10-23 17:52:29 +0000] [2378] [INFO] Handling signal: term
+[2025-10-23 17:52:29 +0000] [2379] [INFO] Worker exiting (pid: 2379)
+[2025-10-23 17:52:30 +0000] [2380] [INFO] Worker exiting (pid: 2380)
+[2025-10-23 17:52:30 +0000] [2381] [INFO] Worker exiting (pid: 2381)
+[2025-10-23 17:52:34 +0000] [2378] [INFO] Shutting down: Master
+[2025-10-23 17:52:36 +0000] [2779] [INFO] Starting gunicorn 23.0.0
+[2025-10-23 17:52:36 +0000] [2779] [INFO] Listening at: http://127.0.0.1:8000 (2779)
+[2025-10-23 17:52:36 +0000] [2779] [INFO] Using worker: sync
+[2025-10-23 17:52:36 +0000] [2783] [INFO] Booting worker with pid: 2783
+[2025-10-23 17:52:37 +0000] [2786] [INFO] Booting worker with pid: 2786
+[2025-10-23 17:52:37 +0000] [2785] [INFO] Booting worker with pid: 2785
+[2025-10-23 17:55:47 +0000] [2783] [INFO] Worker exiting (pid: 2783)
+[2025-10-23 17:55:47 +0000] [2785] [INFO] Worker exiting (pid: 2785)
+[2025-10-23 17:55:47 +0000] [2786] [INFO] Worker exiting (pid: 2786)
+[2025-10-23 17:55:48 +0000] [2779] [INFO] Handling signal: term
+[2025-10-23 17:55:48 +0000] [2779] [ERROR] Worker (pid:2783) was sent SIGTERM!
+[2025-10-23 17:55:48 +0000] [2779] [ERROR] Worker (pid:2786) was sent SIGTERM!
+[2025-10-23 17:55:48 +0000] [2779] [INFO] Shutting down: Master
