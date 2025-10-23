@@ -64,7 +64,7 @@ Group=www-data
 WorkingDirectory=/home/vagrant/projeto2
 Environment="PATH=/home/vagrant/venv/bin"
 # grava logs dentro da pasta do projeto para facilitar debug
-ExecStart=/home/vagrant/venv/bin/gunicorn --workers 3 --bind 127.0.0.1:8000 app:app \
+ExecStart=/home/vagrant/venv/bin/gunicorn --chdir /home/vagrant/projeto2 --workers 3 --bind 127.0.0.1:8000 app:app \
   --access-logfile /home/vagrant/projeto2/logs/gunicorn_access.log \
   --error-logfile  /home/vagrant/projeto2/logs/gunicorn_error.log
 

@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, abort, escape
+from flask import Flask, render_template, request, redirect, url_for, abort
+from markupsafe import escape
 import subprocess, os, sqlite3, datetime, logging
 
 app = Flask(__name__)
@@ -53,7 +54,8 @@ def list_envs():
     conn.close()
 
     try:
-        top_output = subprocess.check_output(["ps", "-eo", "pid,comm,%cpu,%mem", "--sort=-%cpu"], text=True)
+        top_output = subprocess.check_output(["/usr/bin/ps", "-eo", "pid,comm,%cpu,%mem", "--sort=-%cpu"], text=True)
+
     except Exception as e:
         top_output = f"Erro ao executar ps: {e}"
 
@@ -105,10 +107,7 @@ def restart_env(env_name):
 @app.route('/top')
 def get_top():
     try:
-        out = subprocess.check_output(
-            ["ps", "-eo", "pid,comm,%cpu,%mem", "--sort=-%cpu"],
-            text=True
-        )
+        out = subprocess.check_output(["/usr/bin/ps", "-eo", "pid,comm,%cpu,%mem", "--sort=-%cpu"], text=True)
         # só as 20 primeiras linhas (cabeçalho + top 19)
         out = "\n".join(out.splitlines()[:20])
     except Exception as e:
