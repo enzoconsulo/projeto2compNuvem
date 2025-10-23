@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for
-import subprocess, os, sqlite3, datetime
+from flask import Flask, render_template, request, redirect, url_for, abort, escape
+import subprocess, os, sqlite3, datetime, logging
 
 app = Flask(__name__)
 
@@ -114,7 +114,3 @@ def get_top():
     except Exception as e:
         out = f"Erro ao executar ps: {e}"
     return f"<pre>{out}</pre>"
-
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)

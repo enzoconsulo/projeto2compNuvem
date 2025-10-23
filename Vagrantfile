@@ -11,13 +11,13 @@ Vagrant.configure("2") do |config|
   end
 
   # --- Rede ---
-  # Agora o host:8080 -> guest:80 (Apache)
+  # Agora o host:8000 -> guest:8000 (Apache)
   config.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
 
   # --- Pasta sincronizada ---
   config.vm.synced_folder "./projeto2", "/home/vagrant/projeto2"
 
-  # --- Provisionamento automático ---
+  # --- Provisionamento automático ---''
   config.vm.provision "shell", inline: <<-SHELL
     set -e
     echo "=== Atualizando pacotes ==="
@@ -25,8 +25,8 @@ Vagrant.configure("2") do |config|
     DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 
     echo "=== Instalando pacotes necessários ==="
-    apt-get install -y python3 python3-venv python3-pip git apache2 libapache2-mod-proxy-html \
-      libapache2-mod-wsgi-py3 build-essential
+    apt-get install -y python3 python3-venv python3-pip git apache2 libapache2-mod-wsgi-py3 build-essential
+    echo "=== Pacotes instalados ==="
 
     # módulos apache a habilitar mais tarde
     a2enmod proxy proxy_http headers rewrite
@@ -48,6 +48,10 @@ Vagrant.configure("2") do |config|
       sudo -u vagrant -H /home/vagrant/venv/bin/pip install flask gunicorn
     fi
 
+        # criar pasta de logs e garantir permissão
+    mkdir -p /home/vagrant/projeto2/logs
+    chown -R vagrant:vagrant /home/vagrant/projeto2
+
     # Criar systemd unit para gunicorn (assume app.py com app = Flask(...))
     cat > /etc/systemd/system/gunicorn-projeto2.service <<EOF
 [Unit]
@@ -59,7 +63,10 @@ User=vagrant
 Group=www-data
 WorkingDirectory=/home/vagrant/projeto2
 Environment="PATH=/home/vagrant/venv/bin"
-ExecStart=/home/vagrant/venv/bin/gunicorn --workers 3 --bind 127.0.0.1:8000 app:app
+# grava logs dentro da pasta do projeto para facilitar debug
+ExecStart=/home/vagrant/venv/bin/gunicorn --workers 3 --bind 127.0.0.1:8000 app:app \
+  --access-logfile /home/vagrant/projeto2/logs/gunicorn_access.log \
+  --error-logfile  /home/vagrant/projeto2/logs/gunicorn_error.log
 
 Restart=always
 
@@ -71,6 +78,7 @@ EOF
     systemctl daemon-reload
     systemctl enable gunicorn-projeto2
     systemctl restart gunicorn-projeto2
+
 
     # Configurar Apache como reverse proxy
     APACHE_SITE=/etc/apache2/sites-available/projeto2.conf

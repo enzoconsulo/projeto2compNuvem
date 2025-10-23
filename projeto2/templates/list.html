@@ -2,72 +2,81 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Ambientes Criados</title>
+    <title>Lista de Ambientes</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Inclui Font Awesome para o ícone de lixeira -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body { font-family: Arial, sans-serif; background: #f9f9f9; text-align: center; }
-        table { border-collapse: collapse; width: 90%; margin: auto; background: white; }
-        th, td { border: 1px solid #ccc; padding: 8px; }
-        th { background: #0078d7; color: white; }
-        tr:nth-child(even) { background: #f2f2f2; }
-        h1 { color: #333; }
-        pre { text-align: left; background: #111; color: #0f0; padding: 10px; width: 90%; margin: auto; border-radius: 5px; }
-        a { color: #0078d7; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        .btn { padding: 5px 10px; border-radius: 4px; background: #0078d7; color: white; text-decoration: none; }
-        .btn:hover { background: #005fa3; }
+        /* Estilos básicos para o botão de lixeira */
+        .delete-btn {
+            background-color: #dc3545; /* Cor vermelha */
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin-left: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
     </style>
 </head>
 <body>
-    <h1>🌐 Ambientes em Execução</h1>
-
-    <table>
-        <tr>
-            <th>Nome</th>
-            <th>CPU</th>
-            <th>Memória</th>
-            <th>Status</th>
-            <th>Criado em</th>
-            <th>Ações</th>
-        </tr>
-        {% for e in envs %}
-        <tr>
-            <td>{{ e[1] }}</td>
-            <td>{{ e[2] }}</td>
-            <td>{{ e[3] }}</td>
-            <td>{{ e[4] }}</td>
-            <td>{{ e[5] }}</td>
-            <td>
-                <a class="btn" href="/log/{{ e[1] }}">Ver Log</a>
-                <a class="btn" href="/stop/{{ e[1] }}">Encerrar</a>
-                <a class="btn" href="/restart/{{ e[1] }}">Reiniciar</a>
-            </td>
-        </tr>
-        {% endfor %}
+    <h1>🌍 Ambientes em Execução</h1>
+    
+    <table border="1" style="width: 100%; text-align: center;">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>CPU</th>
+                <th>Memória</th>
+                <th>Status</th>
+                <th>Criado em</th>
+                <th colspan="4">Ações</th> <!-- Ações agora tem 4 colunas -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for env in envs %}
+            <tr>
+                <!-- Assumindo a ordem das colunas no DB (incluindo 'command' no final) -->
+                <td>{{ env[1] }}</td> <!-- name -->
+                <td>{{ env[2] }}</td> <!-- cpu -->
+                <td>{{ env[3] }}</td> <!-- mem -->
+                <td>{{ env[4] }}</td> <!-- status -->
+                <td>{{ env[5] }}</td> <!-- created_at -->
+                
+                <td><a href="{{ url_for('view_log', env_name=env[1]) }}">Ver Log</a></td>
+                <td><a href="{{ url_for('stop_env', env_name=env[1]) }}">Encerrar</a></td>
+                <td><a href="{{ url_for('restart_env', env_name=env[1]) }}">Reiniciar</a></td>
+                
+                <!-- NOVA COLUNA: Botão Excluir (Lixeira) -->
+                <td>
+                    <a href="{{ url_for('delete_env', env_name=env[1]) }}" 
+                       class="delete-btn"
+                       onclick="return confirm('Tem certeza que deseja EXCLUIR o ambiente {{ env[1] }}? Esta ação é permanente e remove todos os logs.');">
+                        <i class="fas fa-trash"></i> Excluir
+                    </a>
+                </td>
+                <!-- FIM NOVA COLUNA -->
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 
     <br>
     <a href="/">← Criar novo ambiente</a>
+
+    <hr>
     
     <h2>📊 Processos Ativos (TOP)</h2>
-    <div id="top-container">
-        <pre>Carregando processos...</pre>
+    <div style="background-color: #333; color: #0f0; padding: 15px; border-radius: 5px; font-family: monospace; overflow-x: auto;">
+        <pre>{{ top_output }}</pre>
     </div>
-
-    <script>
-    async function atualizarTop() {
-        try {
-            const response = await fetch("/top");
-            const html = await response.text();
-            document.getElementById("top-container").innerHTML = html;
-        } catch (e) {
-            document.getElementById("top-container").innerHTML = "<pre>Erro ao atualizar TOP.</pre>";
-        }
-    }
-
-    atualizarTop();
-    setInterval(atualizarTop, 1000);
-    </script>
 
 </body>
 </html>
