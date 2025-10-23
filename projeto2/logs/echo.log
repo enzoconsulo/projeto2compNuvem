@@ -1,0 +1,13 @@
+===== Criando ambiente echo =====
+[+] CPU=200000 MEM=512MB CMD=echo "🟢 Início do teste de escrita..."; for i in $(seq 1 5); do echo "Etapa inicial $i/5"; sleep 1; done; echo "😴 Dormindo por 10 segundos..."; sleep 10; echo "🟢 Retomando escrita..."; for i in $(seq 1 5); do echo "Etapa final $i/5"; sleep 1; done; echo "✅ Teste completo!"
+[i] 2025-10-23 19:08:30
+[+] Ambiente echo iniciado com PID 1682
+[+] Log: /home/vagrant/projeto2/logs/echo.log
+============================================
+===== Encerrando ambiente echo =====
+[i] Iniciado em 2025-10-23 19:09:22
+[+] PID wrapper salvo: 1682
+[i] Matando todos os processos do cgroup /sys/fs/cgroup/echo
+[✓] Nenhum processo restante no cgroup.
+[✓] Ambiente echo completamente encerrado e porta liberada.
+===============================================

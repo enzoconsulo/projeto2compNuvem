@@ -1,0 +1,6 @@
+===== Criando ambiente awda =====
+[+] CPU=200000 MEM=512MB CMD=python3 -m http.server 9007 --directory /home/vagrant/projeto2/scripts/awda_site
+[i] 2025-10-23 19:15:55
+[+] Ambiente awda iniciado com PID 2543
+[+] Log: /home/vagrant/projeto2/logs/awda.log
+============================================

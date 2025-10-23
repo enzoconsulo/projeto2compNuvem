@@ -1,82 +1,105 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Lista de Ambientes</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <!-- Inclui Font Awesome para o ícone de lixeira -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Estilos básicos para o botão de lixeira */
-        .delete-btn {
-            background-color: #dc3545; /* Cor vermelha */
-            border: none;
-            color: white;
-            padding: 8px 12px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            margin-left: 5px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .delete-btn:hover {
-            background-color: #c82333;
-        }
-    </style>
-</head>
-<body>
-    <h1>🌍 Ambientes em Execução</h1>
-    
-    <table border="1" style="width: 100%; text-align: center;">
+{% extends "base.html" %}
+{% block title %}Ambientes Criados — EasyExec{% endblock %}
+{% block content %}
+
+<div class="dashboard">
+  <h2>🌐 Ambientes Criados</h2>
+  <p class="subtitle">Gerencie execuções e visualize logs em tempo real.</p>
+
+  <div class="table-container">
+    {% if envs %}
+      <table class="styled-table">
         <thead>
-            <tr>
-                <th>Nome</th>
-                <th>CPU</th>
-                <th>Memória</th>
-                <th>Status</th>
-                <th>Criado em</th>
-                <th colspan="4">Ações</th> <!-- Ações agora tem 4 colunas -->
-            </tr>
+          <tr>
+            <th>Nome</th>
+            <th>CPU</th>
+            <th>Memória</th>
+            <th>Status</th>
+            <th>Criado em</th>
+            <th>Ações</th>
+          </tr>
         </thead>
         <tbody>
-            {% for env in envs %}
-            <tr>
-                <!-- Assumindo a ordem das colunas no DB (incluindo 'command' no final) -->
-                <td>{{ env[1] }}</td> <!-- name -->
-                <td>{{ env[2] }}</td> <!-- cpu -->
-                <td>{{ env[3] }}</td> <!-- mem -->
-                <td>{{ env[4] }}</td> <!-- status -->
-                <td>{{ env[5] }}</td> <!-- created_at -->
-                
-                <td><a href="{{ url_for('view_log', env_name=env[1]) }}">Ver Log</a></td>
-                <td><a href="{{ url_for('stop_env', env_name=env[1]) }}">Encerrar</a></td>
-                <td><a href="{{ url_for('restart_env', env_name=env[1]) }}">Reiniciar</a></td>
-                
-                <!-- NOVA COLUNA: Botão Excluir (Lixeira) -->
-                <td>
-                    <a href="{{ url_for('delete_env', env_name=env[1]) }}" 
-                       class="delete-btn"
-                       onclick="return confirm('Tem certeza que deseja EXCLUIR o ambiente {{ env[1] }}? Esta ação é permanente e remove todos os logs.');">
-                        <i class="fas fa-trash"></i> Excluir
-                    </a>
-                </td>
-                <!-- FIM NOVA COLUNA -->
-            </tr>
-            {% endfor %}
+          {% for e in envs %}
+          <tr>
+            <td><strong>{{ e[1] }}</strong></td>
+            <td>{{ e[2] }}</td>
+            <td>{{ e[3] }}</td>
+            <td>
+              {% if e[4] == "executando" %}
+                <span class="badge green">🟢 Em execução</span>
+              {% elif e[4] == "reiniciado" %}
+                <span class="badge blue">🔵 Reiniciado</span>
+              {% else %}
+                <span class="badge gray">⚫ Finalizado</span>
+              {% endif %}
+            </td>
+            <td>{{ e[5] }}</td>
+            <td class="actions">
+              <a href="/log/{{ e[1] }}" class="btn small">📄 Log</a>
+              <a href="/restart/{{ e[1] }}" class="btn small blue">🔁</a>
+              <a href="/stop/{{ e[1] }}" class="btn small red">🛑</a>
+            </td>
+          </tr>
+          {% endfor %}
         </tbody>
-    </table>
+      </table>
+    {% else %}
+      <p class="empty">Nenhum ambiente criado ainda.</p>
+    {% endif %}
+  </div>
 
-    <br>
-    <a href="/">← Criar novo ambiente</a>
+  <div class="center">
+    <a href="/" class="btn primary">➕ Criar Novo Ambiente</a>
+  </div>
+</div>
 
-    <hr>
-    
-    <h2>📊 Processos Ativos (TOP)</h2>
-    <div style="background-color: #333; color: #0f0; padding: 15px; border-radius: 5px; font-family: monospace; overflow-x: auto;">
-        <pre>{{ top_output }}</pre>
-    </div>
+<hr class="divider">
 
-</body>
-</html>
+<h2>📊 Processos Ativos (TOP)</h2>
+<p class="subtitle">Monitor de processos da VM (atualiza a cada 2s).</p>
+
+<div id="top-container">
+  <pre>Carregando processos...</pre>
+</div>
+
+<script>
+async function atualizarTop() {
+  try {
+    const response = await fetch("/top");
+    const html = await response.text();
+    document.getElementById("top-container").innerHTML = html;
+  } catch (e) {
+    document.getElementById("top-container").innerHTML =
+      "<pre>Erro ao atualizar TOP.</pre>";
+  }
+}
+atualizarTop();
+setInterval(atualizarTop, 2000);
+</script>
+
+<style>
+.dashboard { padding: 20px; }
+.table-container { margin-top: 10px; }
+.styled-table {
+  width: 100%; border-collapse: collapse; background: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 8px;
+}
+.styled-table th {
+  background: #0078d7; color: white; padding: 10px;
+}
+.styled-table td { padding: 8px; border-bottom: 1px solid #ddd; }
+.styled-table tr:nth-child(even) { background: #f9f9f9; }
+.badge { padding: 4px 8px; border-radius: 4px; font-weight: bold; color: white; }
+.badge.green { background: #28a745; }
+.badge.blue  { background: #0078d7; }
+.badge.gray  { background: #6c757d; }
+.actions a { margin-right: 5px; }
+.btn.small { font-size: 0.9em; padding: 5px 8px; border-radius: 5px; }
+.btn.red { background: #dc3545; color: white; }
+.btn.blue { background: #0078d7; color: white; }
+.btn.primary { background: #28a745; color: white; }
+.divider { margin: 25px 0; border: none; height: 2px; background: #ccc; }
+</style>
+
+{% endblock %}

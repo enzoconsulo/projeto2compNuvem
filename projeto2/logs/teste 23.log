@@ -1,0 +1,13 @@
+===== Criando ambiente teste 23 =====
+[+] CPU=200000 MEM=512MB CMD=for i in $(seq 1 30); do echo "🕒 Rodando etapa $i de 30..."; sleep 1; done; echo "✅ Execução completa!"
+[i] 2025-10-23 18:35:33
+[+] Ambiente teste 23 iniciado com PID 9397
+[+] Log: /home/vagrant/projeto2/logs/teste 23.log
+============================================
+===== Encerrando ambiente teste 23 =====
+[i] Iniciado em 2025-10-23 18:36:06
+[+] PID wrapper salvo: 9397
+[i] Matando todos os processos do cgroup /sys/fs/cgroup/teste 23
+[✓] Nenhum processo restante no cgroup.
+[✓] Ambiente teste 23 completamente encerrado e porta liberada.
+===============================================

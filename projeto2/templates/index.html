@@ -1,28 +1,43 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Criar Ambiente</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <h1>🧱 Criar Novo Ambiente</h1>
-    <form action="/create" method="post">
-        <label>Nome do ambiente:</label><br>
-        <input type="text" name="name" required><br><br>
+{% extends "base.html" %}
+{% block title %}Criar Ambiente — EasyExec{% endblock %}
+{% block content %}
 
-        <label>Limite de CPU (microsegundos por segundo):</label><br>
-        <input type="text" name="cpu" value="200000"><br><br>
+<div class="card form-card">
+  <h2>🚀 Criar Novo Ambiente</h2>
+  <p class="subtitle">Defina recursos e comandos para um ambiente isolado.</p>
 
-        <label>Limite de Memória (MB):</label><br>
-        <input type="text" name="mem" value="512"><br><br>
+  <form action="/create" method="post" enctype="multipart/form-data" class="form">
 
-        <label>Comando a executar:</label><br>
-        <input type="text" name="command" value="sleep 60"><br><br>
+    <div class="form-group">
+      <label>Nome do ambiente</label>
+      <input type="text" name="name" placeholder="ex: teste01" required>
+    </div>
 
-        <button type="submit">Criar</button>
-    </form>
-    <br>
-    <a href="/list">Ver ambientes</a>
-</body>
-</html>
+    <div class="form-row">
+      <div class="form-group">
+        <label>CPU (microssegundos/seg)</label>
+        <input type="number" name="cpu" value="200000" required>
+      </div>
+      <div class="form-group">
+        <label>Memória (MB)</label>
+        <input type="number" name="mem" value="512" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Comando(s) a executar</label>
+      <textarea name="command" rows="4" placeholder="echo 'Hello'; sleep 3; echo 'Fim'"></textarea>
+    </div>
+
+    <div class="divider"><span>ou</span></div>
+
+    <div class="form-group">
+      <label>Enviar script pronto</label>
+      <input type="file" name="script_file" accept=".sh,.py,.rb,.pl,.js">
+    </div>
+
+    <button type="submit" class="btn primary full">Criar Ambiente</button>
+  </form>
+</div>
+
+{% endblock %}

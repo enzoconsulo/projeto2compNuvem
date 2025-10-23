@@ -1,0 +1,27 @@
+===== Criando ambiente site2 =====
+[+] CPU=200000 MEM=512MB CMD=python3 -m http.server 9005 --directory /home/vagrant/projeto2/scripts/site_site
+[i] 2025-10-23 20:07:44
+[+] Ambiente site2 iniciado com PID 6874
+[+] Log: /home/vagrant/projeto2/logs/site2.log
+============================================
+[i] Executando comando dentro do namespace...
+192.168.56.1 - - [23/Oct/2025 20:07:48] "GET /site_demo/ HTTP/1.1" 304 -
+192.168.56.1 - - [23/Oct/2025 20:07:48] "GET /site_demo/styles.css HTTP/1.1" 304 -
+192.168.56.1 - - [23/Oct/2025 20:07:48] "GET /site_demo/hero.svg HTTP/1.1" 304 -
+192.168.56.1 - - [23/Oct/2025 20:07:48] "GET /site_demo/logo.svg HTTP/1.1" 304 -
+192.168.56.1 - - [23/Oct/2025 20:07:48] "GET /site_demo/app.js HTTP/1.1" 304 -
+192.168.56.1 - - [23/Oct/2025 20:07:48] "GET /site_demo/favicon.svg HTTP/1.1" 304 -
+===== Encerrando ambiente site2 =====
+[i] Iniciado em 2025-10-23 20:07:54
+[+] PID wrapper salvo: 6874
+[i] Matando todos os processos do cgroup /sys/fs/cgroup/site2
+  → Matando PID 6874 (bash bash -c 
+    echo $$ > '/tmp/site2.pid'
+    echo $$ | sudo tee '/sys/fs/cgroup/site2/cgroup.procs' >/dev/null
+    echo '[i] Executando comando dentro do namespace...' >> '/home/vagrant/projeto2/logs/site2.log'
+    python3 -m http.server 9005 --directory /home/vagrant/projeto2/scripts/site_site >> '/home/vagrant/projeto2/logs/site2.log' 2>&1
+    echo '[✓] Comando finalizado.' >> '/home/vagrant/projeto2/logs/site2.log'
+   )
+[!] 1 processos ainda ativos — forçando remoção direta.
+[✓] Ambiente site2 completamente encerrado e porta liberada.
+===============================================

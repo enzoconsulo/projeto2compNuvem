@@ -1,0 +1,29 @@
+===== Criando ambiente sleepraa =====
+[+] CPU=200000 MEM=512MB CMD=echo 'Iniciando teste 1'; sleep 1; echo 'Linha 1 executada'; sleep 1; echo 'Linha 2 executada'; sleep 1; echo 'Finalizado!'
+[i] 2025-10-23 20:00:54
+[+] Ambiente sleepraa iniciado com PID 5684
+[+] Log: /home/vagrant/projeto2/logs/sleepraa.log
+============================================
+===== Encerrando ambiente sleepraa =====
+[i] Iniciado em 2025-10-23 20:02:40
+[+] PID wrapper salvo: 5684
+[i] Matando todos os processos do cgroup /sys/fs/cgroup/sleepraa
+[✓] Nenhum processo restante no cgroup.
+[✓] Ambiente sleepraa completamente encerrado e porta liberada.
+===============================================
+===== Criando ambiente sleepraa =====
+[+] CPU=200000 MEM=512MB CMD=echo 'Iniciando teste 1'; sleep 1; echo 'Linha 1 executada'; sleep 1; echo 'Linha 2 executada'; sleep 1; echo 'Finalizado!'
+[i] 2025-10-23 20:02:43
+[+] Ambiente sleepraa iniciado com PID 5913
+[+] Log: /home/vagrant/projeto2/logs/sleepraa.log
+============================================
+[i] Executando comando dentro do namespace...
+Finalizado!
+[✓] Comando finalizado.
+===== Encerrando ambiente sleepraa =====
+[i] Iniciado em 2025-10-23 20:03:16
+[+] PID wrapper salvo: 5913
+[i] Matando todos os processos do cgroup /sys/fs/cgroup/sleepraa
+[✓] Nenhum processo restante no cgroup.
+[✓] Ambiente sleepraa completamente encerrado e porta liberada.
+===============================================

@@ -9,22 +9,18 @@ PID_FILE="/tmp/${NAME}.pid"
 
 echo "===== Removendo ambiente $NAME ====="
 
-# 1. Remove os cgroups (necessário para limpeza total dos recursos)
-if [ -d "$CGROUP_PATH" ]; then
-    echo "[+] Removendo cgroup: $CGROUP_PATH"
-    sudo rmdir "$CGROUP_PATH" || sudo rm -rf "$CGROUP_PATH"
-fi
-
-# 2. Remove o arquivo de PID (se existir)
+# 1. Finaliza processo associado
 if [ -f "$PID_FILE" ]; then
-    echo "[+] Removendo arquivo PID: $PID_FILE"
+    PID=$(cat "$PID_FILE")
+    [ -n "$PID" ] && kill -9 $PID 2>/dev/null
     rm -f "$PID_FILE"
 fi
 
-# 3. Remove o arquivo de log
-if [ -f "$LOG_PATH" ]; then
-    echo "[+] Removendo arquivo de Log: $LOG_PATH"
-    rm -f "$LOG_PATH"
-fi
+# 2. Remove cgroup
+[ -d "$CGROUP_PATH" ] && rmdir "$CGROUP_PATH" 2>/dev/null || rm -rf "$CGROUP_PATH" 2>/dev/null
 
-echo "[+] Ambiente $NAME limpo do sistema."
+# 3. Remove log
+[ -f "$LOG_PATH" ] && rm -f "$LOG_PATH" 2>/dev/null
+
+echo "[+] Ambiente $NAME limpo."
+echo "===== Removido ====="

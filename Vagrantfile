@@ -1,112 +1,97 @@
 Vagrant.configure("2") do |config|
-  # --- Sistema Base ---
   config.vm.box = "ubuntu/jammy64"
   config.vm.hostname = "projeto2"
 
-  # --- Recursos da VM ---
   config.vm.provider "virtualbox" do |vb|
     vb.name = "projeto2"
     vb.memory = 4096
     vb.cpus = 2
   end
 
-  # --- Rede ---
-  # Agora o host:8000 -> guest:8000 (Apache)
   config.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
+  config.vm.network "private_network", ip: "192.168.56.10"
 
-  # --- Pasta sincronizada ---
   config.vm.synced_folder "./projeto2", "/home/vagrant/projeto2"
 
-  # --- Provisionamento automático ---''
   config.vm.provision "shell", inline: <<-SHELL
     set -e
+
     echo "=== Atualizando pacotes ==="
     apt-get update -y
-    DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 
-    echo "=== Instalando pacotes necessários ==="
-    apt-get install -y python3 python3-venv python3-pip git apache2 libapache2-mod-wsgi-py3 build-essential
-    echo "=== Pacotes instalados ==="
+    echo "=== Instalando dependências ==="
+    apt-get install -y locales python3 python3-pip git apache2 libapache2-mod-wsgi-py3 \
+                       systemd psmisc curl
 
-    # módulos apache a habilitar mais tarde
-    a2enmod proxy proxy_http headers rewrite
+    echo "=== Locale UTF-8 ==="
+    locale-gen en_US.UTF-8
+    update-locale LANG=en_US.UTF-8
+    export LANG=en_US.UTF-8
+    export LC_ALL=en_US.UTF-8
 
-    # criar virtualenv como usuário vagrant
-    if [ ! -d /home/vagrant/venv ]; then
-      echo "=== Criando virtualenv em /home/vagrant/venv ==="
-      sudo -u vagrant -H python3 -m venv /home/vagrant/venv
-    fi
+    echo "=== Instalando libs Python ==="
+    pip3 install --ignore-installed -r /home/vagrant/projeto2/requirements.txt || true
 
-    # instalar dependências no venv (usar requirements.txt se existir)
-    if [ -f /home/vagrant/projeto2/requirements.txt ]; then
-      echo "=== Instalando dependências do requirements.txt ==="
-      sudo -u vagrant -H /home/vagrant/venv/bin/pip install --upgrade pip
-      sudo -u vagrant -H /home/vagrant/venv/bin/pip install -r /home/vagrant/projeto2/requirements.txt
-    else
-      echo "=== requirements.txt não encontrado. Instalando Flask e Gunicorn ==="
-      sudo -u vagrant -H /home/vagrant/venv/bin/pip install --upgrade pip
-      sudo -u vagrant -H /home/vagrant/venv/bin/pip install flask gunicorn
-    fi
-
-        # criar pasta de logs e garantir permissão
+    echo "=== Criando estrutura de diretórios ==="
     mkdir -p /home/vagrant/projeto2/logs
-    chown -R vagrant:vagrant /home/vagrant/projeto2
+    mkdir -p /home/vagrant/projeto2/scripts
 
-    # Criar systemd unit para gunicorn (assume app.py com app = Flask(...))
-    cat > /etc/systemd/system/gunicorn-projeto2.service <<EOF
-[Unit]
-Description=Gunicorn instance for projeto2
-After=network.target
+    echo "=== Corrigindo permissões ==="
+    chmod o+x /home
+    chmod o+x /home/vagrant
+    chown -R www-data:www-data /home/vagrant/projeto2
+    chmod -R 755 /home/vagrant/projeto2
 
-[Service]
-User=vagrant
-Group=www-data
-WorkingDirectory=/home/vagrant/projeto2
-Environment="PATH=/home/vagrant/venv/bin"
-ExecStart=/home/vagrant/venv/bin/gunicorn --chdir /home/vagrant/projeto2 --workers 3 --bind 127.0.0.1:8000 app:app --access-logfile /home/vagrant/projeto2/logs/gunicorn_access.log --error-logfile /home/vagrant/projeto2/logs/gunicorn_error.log
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-    echo "=== Recarregando systemd e iniciando gunicorn ==="
-    systemctl daemon-reload
-    systemctl enable gunicorn-projeto2
-    systemctl restart gunicorn-projeto2
-
-
-    # Configurar Apache como reverse proxy
-    APACHE_SITE=/etc/apache2/sites-available/projeto2.conf
-
-    cat > $APACHE_SITE <<EOF
+    echo "=== Configurando Apache (mod_wsgi) ==="
+    cat <<'EOF' > /etc/apache2/sites-available/projeto2.conf
 <VirtualHost *:80>
-    ServerName projeto2
+    ServerName localhost
+    DocumentRoot /home/vagrant/projeto2
 
-    # Proxy para gunicorn (aplicacao Python)
-    ProxyPreserveHost On
-    ProxyPass / http://127.0.0.1:8000/
-    ProxyPassReverse / http://127.0.0.1:8000/
+    WSGIDaemonProcess projeto2 python-home=/usr/bin/python3 python-path=/home/vagrant/projeto2
+    WSGIScriptAlias / /home/vagrant/projeto2/app.wsgi
 
-    # Se tiver pasta de estáticos no Flask: /home/vagrant/projeto2/static
-    Alias /static /home/vagrant/projeto2/static
-    <Directory /home/vagrant/projeto2/static>
+    <Directory /home/vagrant/projeto2>
+        Options +ExecCGI +FollowSymLinks
+        AllowOverride All
         Require all granted
-        Options Indexes FollowSymLinks
     </Directory>
 
-    ErrorLog \${APACHE_LOG_DIR}/projeto2_error.log
-    CustomLog \${APACHE_LOG_DIR}/projeto2_access.log combined
+    ErrorLog ${APACHE_LOG_DIR}/projeto2-error.log
+    CustomLog ${APACHE_LOG_DIR}/projeto2-access.log combined
 </VirtualHost>
 EOF
 
-    a2ensite projeto2.conf
     a2dissite 000-default.conf || true
-
-    echo "=== Reiniciando Apache ==="
+    a2ensite projeto2.conf
+    systemctl enable apache2
     systemctl restart apache2
 
-    echo "=== Provisionamento finalizado ==="
-    echo "Acesse a aplicação em http://localhost:8080"
+    echo "=== Criando serviço systemd para backend_daemon ==="
+    cat <<'EOF2' > /etc/systemd/system/backend_daemon.service
+[Unit]
+Description=Backend Executor (namespaces + cgroups) para Projeto2
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /home/vagrant/projeto2/backend_daemon.py
+Restart=always
+User=root
+WorkingDirectory=/home/vagrant/projeto2
+Environment=LANG=en_US.UTF-8
+Environment=LC_ALL=en_US.UTF-8
+
+[Install]
+WantedBy=multi-user.target
+EOF2
+
+    echo "=== Ativando serviço backend_daemon ==="
+    systemctl daemon-reload
+    systemctl enable backend_daemon
+    systemctl restart backend_daemon
+
+    echo "=== Finalizando provisionamento ==="
+    echo "✅ Apache e backend_daemon estão ativos."
+    echo "Acesse http://localhost:8080"
   SHELL
 end

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}EasyExec{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-left">
+      <span class="logo">🧱 EasyExec</span>
+    </div>
+    <div class="nav-right">
+      <a href="/" class="nav-link">Novo Ambiente</a>
+      <a href="/list" class="nav-link">Ambientes</a>
+    </div>
+  </nav>
+
+  <main class="content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p>© 2025 EasyExec — Gerenciamento de ambientes isolados via namespaces e cgroups</p>
+  </footer>
+</body>
+</html>

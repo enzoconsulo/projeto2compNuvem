@@ -6017,3 +6017,484 @@ werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'delete
 [2025-10-23 17:55:48 +0000] [2779] [ERROR] Worker (pid:2783) was sent SIGTERM!
 [2025-10-23 17:55:48 +0000] [2779] [ERROR] Worker (pid:2786) was sent SIGTERM!
 [2025-10-23 17:55:48 +0000] [2779] [INFO] Shutting down: Master
+[2025-10-23 17:55:50 +0000] [2870] [INFO] Starting gunicorn 23.0.0
+[2025-10-23 17:55:50 +0000] [2870] [INFO] Listening at: http://127.0.0.1:8000 (2870)
+[2025-10-23 17:55:50 +0000] [2870] [INFO] Using worker: sync
+[2025-10-23 17:55:50 +0000] [2871] [INFO] Booting worker with pid: 2871
+[2025-10-23 17:55:50 +0000] [2872] [INFO] Booting worker with pid: 2872
+[2025-10-23 17:55:50 +0000] [2873] [INFO] Booting worker with pid: 2873
+[2025-10-23 17:57:28,271] ERROR in app: Exception on /create [POST]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 39, in create
+    subprocess.run(["bash", f"{SCRIPT_DIR}/create_env.sh", name, cpu, mem, command, log_path])
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 18:00:40,263] ERROR in app: Exception on /delete/stress10 [GET]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 116, in delete_env
+    cursor.execute("DELETE FROM envs WHERE name = ?", (env_name,))
+sqlite3.OperationalError: no such table: envs
+[2025-10-23 19:09:28 +0000] [2870] [CRITICAL] WORKER TIMEOUT (pid:2872)
+[2025-10-23 19:09:30 +0000] [2872] [INFO] Worker exiting (pid: 2872)
+[2025-10-23 19:09:32 +0000] [2870] [ERROR] Worker (pid:2872) exited with code 1
+[2025-10-23 19:09:33 +0000] [2870] [ERROR] Worker (pid:2872) exited with code 1.
+[2025-10-23 19:12:36 +0000] [2909] [INFO] Booting worker with pid: 2909
+[2025-10-23 19:30:54,564] ERROR in app: Exception on /delete/stress10 [GET]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 116, in delete_env
+    cursor.execute("DELETE FROM envs WHERE name = ?", (env_name,))
+sqlite3.OperationalError: no such table: envs
+[2025-10-23 19:33:18,473] ERROR in app: Exception on /create [POST]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 39, in create
+    subprocess.run(["bash", f"{SCRIPT_DIR}/create_env.sh", name, cpu, mem, command, log_path])
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 19:38:04,262] ERROR in app: Exception on /create [POST]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 39, in create
+    # Chama script bash para criar ambiente
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 19:38:15,540] ERROR in app: Exception on /restart/stress10 [GET]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 98, in restart_env
+    name, cpu, mem, log_path = env
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 19:43:51 +0000] [2909] [INFO] Worker exiting (pid: 2909)
+[2025-10-23 19:43:51 +0000] [2871] [INFO] Worker exiting (pid: 2871)
+[2025-10-23 19:43:51 +0000] [2873] [INFO] Worker exiting (pid: 2873)
+[2025-10-23 19:43:51 +0000] [2870] [INFO] Handling signal: term
+[2025-10-23 19:43:51 +0000] [2870] [ERROR] Worker (pid:2909) was sent SIGTERM!
+[2025-10-23 19:43:51 +0000] [2870] [ERROR] Worker (pid:2871) was sent SIGTERM!
+[2025-10-23 19:43:51 +0000] [2870] [ERROR] Worker (pid:2873) was sent SIGTERM!
+[2025-10-23 19:43:51 +0000] [2870] [INFO] Shutting down: Master
+[2025-10-23 19:43:51 +0000] [3310] [INFO] Starting gunicorn 23.0.0
+[2025-10-23 19:43:51 +0000] [3310] [INFO] Listening at: http://127.0.0.1:8000 (3310)
+[2025-10-23 19:43:51 +0000] [3310] [INFO] Using worker: sync
+[2025-10-23 19:43:51 +0000] [3312] [INFO] Booting worker with pid: 3312
+[2025-10-23 19:43:51 +0000] [3313] [INFO] Booting worker with pid: 3313
+[2025-10-23 19:43:51 +0000] [3314] [INFO] Booting worker with pid: 3314
+[2025-10-23 19:44:24,793] ERROR in app: Exception on /create [POST]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 40, in create
+    subprocess.run(["bash", f"{SCRIPT_DIR}/create_env.sh", name, cpu, mem, command, log_path])
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 19:53:46,487] ERROR in app: Exception on /create [POST]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 40, in create
+    subprocess.run(f"bash {SCRIPT_DIR}/create_env.sh '{name}' '{cpu}' '{mem}' \"{command}\" '{log_path}'", shell=True)
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 19:56:01,522] ERROR in app: Exception on /stop/stress80 [GET]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 70, in stop_env
+    subprocess.run(["bash", f"{SCRIPT_DIR}/stop_env.sh", env_name])
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 19:56:05,608] ERROR in app: Exception on /restart/stress80 [GET]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 101, in restart_env
+    subprocess.run(f"bash {SCRIPT_DIR}/create_env.sh '{name}' '{cpu}' '{mem}' \"{command}\" '{log_path}'", shell=True)
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 19:57:36,231] ERROR in app: Exception on /create [POST]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 40, in create
+    subprocess.run(f"bash {SCRIPT_DIR}/create_env.sh '{name}' '{cpu}' '{mem}' \"{command}\" '{log_path}'", shell=True)
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 20:00:01,377] ERROR in app: Exception on /stop/stress100 [GET]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 70, in stop_env
+    subprocess.run(["bash", f"{SCRIPT_DIR}/stop_env.sh", env_name])
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 20:00:06,453] ERROR in app: Exception on /restart/stress20 [GET]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 101, in restart_env
+    subprocess.run(f"bash {SCRIPT_DIR}/create_env.sh '{name}' '{cpu}' '{mem}' \"{command}\" '{log_path}'", shell=True)
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 20:00:12,691] ERROR in app: Exception on /delete/stress10 [GET]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 130, in delete_env
+    subprocess.run(["bash", f"{SCRIPT_DIR}/delete_env.sh", env_name])
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 20:00:24,432] ERROR in app: Exception on /create [POST]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 40, in create
+    subprocess.run(f"bash {SCRIPT_DIR}/create_env.sh '{name}' '{cpu}' '{mem}' \"{command}\" '{log_path}'", shell=True)
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 20:05:18,677] ERROR in app: Exception on /create [POST]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 40, in create
+    subprocess.run(["bash", f"{SCRIPT_DIR}/create_env.sh", name, cpu, mem, command, log_path])
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 20:11:53,457] ERROR in app: Exception on /create [POST]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 40, in create
+    subprocess.run(["bash", f"{SCRIPT_DIR}/create_env.sh", name, cpu, mem, command, log_path])
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 20:27:20,142] ERROR in app: Exception on /create [POST]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 40, in create
+    subprocess.run(["bash", f"{SCRIPT_DIR}/create_env.sh", name, cpu, mem, command, log_path])
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 20:27:32,319] ERROR in app: Exception on /delete/stress20 [GET]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 130, in delete_env
+    os.remove(log_path)
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 20:33:48 +0000] [3314] [INFO] Worker exiting (pid: 3314)
+[2025-10-23 20:33:48 +0000] [3312] [INFO] Worker exiting (pid: 3312)
+[2025-10-23 20:33:48 +0000] [3313] [INFO] Worker exiting (pid: 3313)
+[2025-10-23 20:33:48 +0000] [3310] [INFO] Handling signal: term
+[2025-10-23 20:33:49 +0000] [3310] [ERROR] Worker (pid:3312) was sent SIGTERM!
+[2025-10-23 20:33:49 +0000] [3310] [ERROR] Worker (pid:3313) was sent SIGTERM!
+[2025-10-23 20:33:49 +0000] [3310] [ERROR] Worker (pid:3314) was sent SIGTERM!
+[2025-10-23 20:33:49 +0000] [3310] [INFO] Shutting down: Master
+[2025-10-23 20:33:50 +0000] [3717] [INFO] Starting gunicorn 23.0.0
+[2025-10-23 20:33:50 +0000] [3717] [INFO] Listening at: http://127.0.0.1:8000 (3717)
+[2025-10-23 20:33:50 +0000] [3717] [INFO] Using worker: sync
+[2025-10-23 20:33:50 +0000] [3720] [INFO] Booting worker with pid: 3720
+[2025-10-23 20:33:50 +0000] [3721] [INFO] Booting worker with pid: 3721
+[2025-10-23 20:33:50 +0000] [3722] [INFO] Booting worker with pid: 3722
+[2025-10-23 20:34:26,053] ERROR in app: Exception on /restart/stress30 [GET]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 108, in restart_env
+    cur.execute("SELECT name, cpu, mem, command, log_path FROM envs WHERE name=?", (env_name,))
+sqlite3.OperationalError: no such column: command
+[2025-10-23 20:34:29,808] ERROR in app: Exception on /stop/stress30 [GET]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 79, in stop_env
+    result = subprocess.run(
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 20:34:33,803] ERROR in app: Exception on /delete/stress30 [GET]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 157, in delete_env
+    result = subprocess.run(
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 20:34:39,806] ERROR in app: Exception on /delete/stress50 [GET]
+Traceback (most recent call last):
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/vagrant/venv/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/vagrant/projeto2/app.py", line 157, in delete_env
+    result = subprocess.run(
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'bash'
+[2025-10-23 21:14:41 +0000] [3721] [INFO] Worker exiting (pid: 3721)
+[2025-10-23 21:14:41 +0000] [3720] [INFO] Worker exiting (pid: 3720)
+[2025-10-23 21:14:41 +0000] [3722] [INFO] Worker exiting (pid: 3722)
+[2025-10-23 21:14:41 +0000] [3717] [INFO] Handling signal: term
+[2025-10-23 21:14:42 +0000] [3717] [INFO] Shutting down: Master
+[2025-10-23 21:15:42 +0000] [643] [INFO] Starting gunicorn 23.0.0
+[2025-10-23 21:15:42 +0000] [643] [INFO] Listening at: http://127.0.0.1:8000 (643)
+[2025-10-23 21:15:42 +0000] [643] [INFO] Using worker: sync
+[2025-10-23 21:15:42 +0000] [778] [INFO] Booting worker with pid: 778
+[2025-10-23 21:15:42 +0000] [779] [INFO] Booting worker with pid: 779
+[2025-10-23 21:15:43 +0000] [780] [INFO] Booting worker with pid: 780
+[2025-10-23 21:16:17 +0000] [778] [INFO] Worker exiting (pid: 778)
+[2025-10-23 21:16:17 +0000] [643] [INFO] Handling signal: term
+[2025-10-23 21:16:17 +0000] [779] [INFO] Worker exiting (pid: 779)
+[2025-10-23 21:16:17 +0000] [780] [INFO] Worker exiting (pid: 780)
+[2025-10-23 21:16:17 +0000] [643] [ERROR] Worker (pid:778) was sent SIGTERM!
+[2025-10-23 21:16:17 +0000] [643] [INFO] Shutting down: Master
+[2025-10-23 21:16:17 +0000] [1771] [INFO] Starting gunicorn 23.0.0
+[2025-10-23 21:16:17 +0000] [1771] [INFO] Listening at: http://127.0.0.1:8000 (1771)
+[2025-10-23 21:16:17 +0000] [1771] [INFO] Using worker: sync
+[2025-10-23 21:16:17 +0000] [1790] [INFO] Booting worker with pid: 1790
+[2025-10-23 21:16:17 +0000] [1792] [INFO] Booting worker with pid: 1792
+[2025-10-23 21:16:18 +0000] [1796] [INFO] Booting worker with pid: 1796

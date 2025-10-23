@@ -1,0 +1,102 @@
+===== Criando ambiente site =====
+[+] CPU=200000 MEM=512MB CMD=python3 -m http.server 9005 --directory /home/vagrant/projeto2/scripts/site_site
+[i] 2025-10-23 18:46:01
+[+] Ambiente site iniciado com PID 2251
+[+] Log: /home/vagrant/projeto2/logs/site.log
+============================================
+192.168.56.1 - - [23/Oct/2025 18:46:06] "GET /site_demo/ HTTP/1.1" 200 -
+192.168.56.1 - - [23/Oct/2025 18:46:06] "GET /site_demo/app.js HTTP/1.1" 200 -
+192.168.56.1 - - [23/Oct/2025 18:46:06] "GET /site_demo/styles.css HTTP/1.1" 200 -
+192.168.56.1 - - [23/Oct/2025 18:46:06] "GET /site_demo/hero.svg HTTP/1.1" 200 -
+192.168.56.1 - - [23/Oct/2025 18:46:06] "GET /site_demo/logo.svg HTTP/1.1" 200 -
+192.168.56.1 - - [23/Oct/2025 18:46:06] "GET /site_demo/favicon.svg HTTP/1.1" 200 -
+192.168.56.1 - - [23/Oct/2025 18:46:06] "GET /site_demo/ HTTP/1.1" 304 -
+===== Encerrando ambiente site =====
+[i] Iniciado em 2025-10-23 18:46:24
+[+] PID wrapper salvo: 2251
+[i] Matando todos os processos do cgroup /sys/fs/cgroup/site
+  → Matando PID 2255 (python3.10 python3 -m http.server 9005 --directory /home/vagrant/projeto2/scripts/site_site )
+[✓] Nenhum processo restante no cgroup.
+[✓] Ambiente site completamente encerrado e porta liberada.
+===============================================
+===== Criando ambiente site =====
+[+] CPU=200000 MEM=512MB CMD=python3 -m http.server 9005 --directory /home/vagrant/projeto2/scripts/site_site
+[i] 2025-10-23 18:46:36
+[+] Ambiente site iniciado com PID 2356
+[+] Log: /home/vagrant/projeto2/logs/site.log
+============================================
+192.168.56.1 - - [23/Oct/2025 18:46:37] "GET /site_demo/ HTTP/1.1" 304 -
+192.168.56.1 - - [23/Oct/2025 18:46:37] "GET /site_demo/styles.css HTTP/1.1" 304 -
+192.168.56.1 - - [23/Oct/2025 18:46:37] "GET /site_demo/logo.svg HTTP/1.1" 304 -
+192.168.56.1 - - [23/Oct/2025 18:46:37] "GET /site_demo/hero.svg HTTP/1.1" 304 -
+192.168.56.1 - - [23/Oct/2025 18:46:37] "GET /site_demo/app.js HTTP/1.1" 304 -
+192.168.56.1 - - [23/Oct/2025 18:46:37] "GET /site_demo/favicon.svg HTTP/1.1" 304 -
+===== Encerrando ambiente site =====
+[i] Iniciado em 2025-10-23 18:46:39
+[+] PID wrapper salvo: 2356
+[i] Matando todos os processos do cgroup /sys/fs/cgroup/site
+  → Matando PID 2361 (python3.10 python3 -m http.server 9005 --directory /home/vagrant/projeto2/scripts/site_site )
+[✓] Nenhum processo restante no cgroup.
+[✓] Ambiente site completamente encerrado e porta liberada.
+===============================================
+===== Criando ambiente site =====
+[+] CPU=200000 MEM=512MB CMD=python3 -m http.server 9005 --directory /home/vagrant/projeto2/scripts/site_site
+[i] 2025-10-23 19:09:51
+[+] Ambiente site iniciado com PID 1867
+[+] Log: /home/vagrant/projeto2/logs/site.log
+============================================
+192.168.56.1 - - [23/Oct/2025 19:10:27] "GET /site_demo/ HTTP/1.1" 304 -
+192.168.56.1 - - [23/Oct/2025 19:10:27] "GET /site_demo/styles.css HTTP/1.1" 304 -
+192.168.56.1 - - [23/Oct/2025 19:10:27] "GET /site_demo/logo.svg HTTP/1.1" 304 -
+192.168.56.1 - - [23/Oct/2025 19:10:27] "GET /site_demo/hero.svg HTTP/1.1" 304 -
+192.168.56.1 - - [23/Oct/2025 19:10:27] "GET /site_demo/app.js HTTP/1.1" 304 -
+192.168.56.1 - - [23/Oct/2025 19:10:28] "GET /site_demo/favicon.svg HTTP/1.1" 304 -
+===== Encerrando ambiente site =====
+[i] 2025-10-23 19:12:02
+[+] PID wrapper salvo: 1867
+[i] Encerrando processos dentro do cgroup...
+ → Matando PID 1871
+[✓] Ambiente site encerrado com sucesso.
+============================================
+===== Criando ambiente site =====
+[+] CPU=200000 MEM=512MB CMD=python3 -m http.server 9005 --directory /home/vagrant/projeto2/scripts/site_site
+[i] 2025-10-23 19:57:48
+[+] Ambiente site iniciado com PID 5244
+[+] Log: /home/vagrant/projeto2/logs/site.log
+============================================
+192.168.56.1 - - [23/Oct/2025 19:57:51] "GET /site_demo/ HTTP/1.1" 304 -
+192.168.56.1 - - [23/Oct/2025 19:57:51] "GET /site_demo/styles.css HTTP/1.1" 304 -
+192.168.56.1 - - [23/Oct/2025 19:57:51] "GET /site_demo/app.js HTTP/1.1" 304 -
+192.168.56.1 - - [23/Oct/2025 19:57:51] "GET /site_demo/logo.svg HTTP/1.1" 304 -
+192.168.56.1 - - [23/Oct/2025 19:57:51] "GET /site_demo/hero.svg HTTP/1.1" 304 -
+192.168.56.1 - - [23/Oct/2025 19:57:51] "GET /site_demo/favicon.svg HTTP/1.1" 304 -
+===== Encerrando ambiente site =====
+[i] Iniciado em 2025-10-23 19:57:58
+[+] PID wrapper salvo: 5244
+[i] Matando todos os processos do cgroup /sys/fs/cgroup/site
+  → Matando PID 5248 (python3.10 python3 -m http.server 9005 --directory /home/vagrant/projeto2/scripts/site_site )
+[✓] Nenhum processo restante no cgroup.
+[✓] Ambiente site completamente encerrado e porta liberada.
+===============================================
+===== Criando ambiente site =====
+[+] CPU=200000 MEM=512MB CMD=python3 -m http.server 9005 --directory /home/vagrant/projeto2/scripts/site_site
+[i] 2025-10-23 20:02:53
+[+] Ambiente site iniciado com PID 5956
+[+] Log: /home/vagrant/projeto2/logs/site.log
+[i] Executando comando dentro do namespace...
+============================================
+192.168.56.1 - - [23/Oct/2025 20:02:55] "GET /site_demo/ HTTP/1.1" 304 -
+===== Encerrando ambiente site =====
+[i] Iniciado em 2025-10-23 20:02:58
+[+] PID wrapper salvo: 5956
+[i] Matando todos os processos do cgroup /sys/fs/cgroup/site
+  → Matando PID 5956 (bash bash -c 
+    echo $$ > '/tmp/site.pid'
+    echo $$ | sudo tee '/sys/fs/cgroup/site/cgroup.procs' >/dev/null
+    echo '[i] Executando comando dentro do namespace...' >> '/home/vagrant/projeto2/logs/site.log'
+    python3 -m http.server 9005 --directory /home/vagrant/projeto2/scripts/site_site >> '/home/vagrant/projeto2/logs/site.log' 2>&1
+    echo '[✓] Comando finalizado.' >> '/home/vagrant/projeto2/logs/site.log'
+   )
+[!] 1 processos ainda ativos — forçando remoção direta.
+[✓] Ambiente site completamente encerrado e porta liberada.
+===============================================

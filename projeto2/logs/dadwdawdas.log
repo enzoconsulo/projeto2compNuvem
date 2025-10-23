@@ -1,0 +1,25 @@
+===== Criando ambiente dadwdawdas =====
+[+] CPU=200000 MEM=512MB CMD=for i in $(seq 1 10); do echo "Etapa $i/10..."; sleep 1; done; echo "✅ Finalizado!"
+[i] 2025-10-23 18:38:32
+[+] Ambiente dadwdawdas iniciado com PID 9844
+[+] Log: /home/vagrant/projeto2/logs/dadwdawdas.log
+============================================
+===== Criando ambiente dadwdawdas =====
+[+] CPU=200000 MEM=512MB CMD=for i in $(seq 1 10); do echo "Etapa $i/10..."; sleep 1; done; echo "✅ Finalizado!"
+[i] 2025-10-23 18:38:33
+[+] Ambiente dadwdawdas iniciado com PID 9870
+[+] Log: /home/vagrant/projeto2/logs/dadwdawdas.log
+============================================
+===== Criando ambiente dadwdawdas =====
+[+] CPU=200000 MEM=512MB CMD=for i in $(seq 1 10); do echo "Etapa $i/10..."; sleep 1; done; echo "✅ Finalizado!"
+[i] 2025-10-23 18:38:39
+[+] Ambiente dadwdawdas iniciado com PID 9901
+[+] Log: /home/vagrant/projeto2/logs/dadwdawdas.log
+============================================
+===== Encerrando ambiente dadwdawdas =====
+[i] Iniciado em 2025-10-23 18:39:15
+[+] PID wrapper salvo: 9901
+[i] Matando todos os processos do cgroup /sys/fs/cgroup/dadwdawdas
+[✓] Nenhum processo restante no cgroup.
+[✓] Ambiente dadwdawdas completamente encerrado e porta liberada.
+===============================================
