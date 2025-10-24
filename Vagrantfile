@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
 
     echo "=== Instalando dependências ==="
     apt-get install -y locales python3 python3-pip git apache2 libapache2-mod-wsgi-py3 \
-                       systemd psmisc curl
+                       systemd psmisc curl dos2unix
 
     echo "=== Locale UTF-8 ==="
     locale-gen en_US.UTF-8
@@ -41,6 +41,13 @@ Vagrant.configure("2") do |config|
     chmod o+x /home/vagrant
     chown -R www-data:www-data /home/vagrant/projeto2
     chmod -R 755 /home/vagrant/projeto2
+
+    echo "=== Convertendo scripts CRLF → LF e aplicando permissões ==="
+    if [ -d /home/vagrant/projeto2/scripts ]; then
+      find /home/vagrant/projeto2/scripts -type f -name "*.sh" -exec dos2unix {} \\; 2>/dev/null
+      chmod +x /home/vagrant/projeto2/scripts/*.sh || true
+      echo "[✓] Scripts convertidos e executáveis."
+    fi
 
     echo "=== Configurando Apache (mod_wsgi) ==="
     cat <<'EOF' > /etc/apache2/sites-available/projeto2.conf
@@ -90,8 +97,8 @@ EOF2
     systemctl enable backend_daemon
     systemctl restart backend_daemon
 
-    echo "=== Finalizando provisionamento ==="
-    echo "✅ Apache e backend_daemon estão ativos."
+    echo "=== Provisionamento concluído ==="
+    echo "✅ Apache e backend_daemon ativos."
     echo "Acesse http://localhost:8080"
   SHELL
 end
