@@ -16,40 +16,30 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     set -e
 
-    echo "=== Atualizando pacotes ==="
     apt-get update -y
 
-    echo "=== Instalando dependências ==="
     apt-get install -y locales python3 python3-pip git apache2 libapache2-mod-wsgi-py3 \
                        systemd psmisc curl dos2unix
 
-    echo "=== Locale UTF-8 ==="
     locale-gen en_US.UTF-8
     update-locale LANG=en_US.UTF-8
     export LANG=en_US.UTF-8
     export LC_ALL=en_US.UTF-8
 
-    echo "=== Instalando libs Python ==="
     pip3 install --ignore-installed -r /home/vagrant/projeto2/requirements.txt || true
 
-    echo "=== Criando estrutura de diretórios ==="
     mkdir -p /home/vagrant/projeto2/logs
     mkdir -p /home/vagrant/projeto2/scripts
-
-    echo "=== Corrigindo permissões ==="
     chmod o+x /home
     chmod o+x /home/vagrant
     chown -R www-data:www-data /home/vagrant/projeto2
     chmod -R 755 /home/vagrant/projeto2
 
-    echo "=== Convertendo scripts CRLF → LF e aplicando permissões ==="
     if [ -d /home/vagrant/projeto2/scripts ]; then
       find /home/vagrant/projeto2/scripts -type f -name "*.sh" -exec dos2unix {} \\; 2>/dev/null
       chmod +x /home/vagrant/projeto2/scripts/*.sh || true
-      echo "[✓] Scripts convertidos e executáveis."
     fi
 
-    echo "=== Configurando Apache (mod_wsgi) ==="
     cat <<'EOF' > /etc/apache2/sites-available/projeto2.conf
 <VirtualHost *:80>
     ServerName localhost
@@ -74,7 +64,6 @@ EOF
     systemctl enable apache2
     systemctl restart apache2
 
-    echo "=== Criando serviço systemd para backend_daemon ==="
     cat <<'EOF2' > /etc/systemd/system/backend_daemon.service
 [Unit]
 Description=Backend Executor (namespaces + cgroups) para Projeto2
@@ -91,14 +80,8 @@ Environment=LC_ALL=en_US.UTF-8
 [Install]
 WantedBy=multi-user.target
 EOF2
-
-    echo "=== Ativando serviço backend_daemon ==="
     systemctl daemon-reload
     systemctl enable backend_daemon
     systemctl restart backend_daemon
-
-    echo "=== Provisionamento concluído ==="
-    echo "✅ Apache e backend_daemon ativos."
-    echo "Acesse http://localhost:8080"
   SHELL
 end

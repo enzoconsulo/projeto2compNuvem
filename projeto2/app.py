@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
 import os, sqlite3, datetime, traceback, zipfile, unicodedata, re, subprocess
 from flask import Flask, render_template, request, redirect, url_for
 import requests
 
 app = Flask(__name__)
 
-# === Caminhos principais ===
 BASE_DIR = "/home/vagrant/projeto2"
 DB_PATH  = os.path.join(BASE_DIR, "database.db")
 LOG_DIR  = os.path.join(BASE_DIR, "logs")
@@ -14,16 +12,13 @@ SCRIPT_DIR = os.path.join(BASE_DIR, "scripts")
 os.makedirs(LOG_DIR, exist_ok=True)
 os.makedirs(SCRIPT_DIR, exist_ok=True)
 
-# === Funções utilitárias ===
 def safe_filename(name):
-    """Remove acentos e caracteres inválidos de nomes de arquivos."""
     nfkd = unicodedata.normalize("NFKD", name)
     safe = "".join([c for c in nfkd if not unicodedata.combining(c)])
     safe = re.sub(r"[^a-zA-Z0-9_.-]", "_", safe)
     return safe
 
 def db_init():
-    """Cria o banco de dados se não existir."""
     conn = sqlite3.connect(DB_PATH)
     conn.execute("""
     CREATE TABLE IF NOT EXISTS envs (
@@ -48,8 +43,6 @@ def db_execute(sql, params=()):
 
 db_init()
 
-# === Rotas ===
-
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -64,40 +57,34 @@ def create():
 
         script_file = request.files.get("script_file")
 
-        # --- Caso 1: Upload de arquivo ---
         if script_file and script_file.filename:
             filename = safe_filename(script_file.filename)
             name_s = safe_filename(name)
             script_path = os.path.join(SCRIPT_DIR, f"{name_s}_{filename}")
             script_file.save(script_path)
 
-            # Se for um ZIP, extrai e sobe servidor local
             if filename.lower().endswith(".zip"):
                 extract_dir = os.path.join(SCRIPT_DIR, f"{name_s}_site")
                 os.makedirs(extract_dir, exist_ok=True)
                 with zipfile.ZipFile(script_path, "r") as zip_ref:
                     zip_ref.extractall(extract_dir)
-                # Porta padrão para sites (pode ajustar manualmente)
                 port = "9005"
                 command = f"python3 -m http.server {port} --directory {extract_dir}"
             else:
                 os.chmod(script_path, 0o755)
                 command = f"bash {script_path}"
 
-        # --- Caso 2: comando manual ---
         else:
             command_raw = request.form.get("command", "").strip()
-            command_raw = command_raw.replace("\r", "")  # 🔧 remove quebras de linha do Windows
+            command_raw = command_raw.replace("\r", "")
 
-            # Salva o comando num script temporário no diretório scripts/
             script_path = os.path.join(SCRIPT_DIR, f"{safe_filename(name)}_cmd.sh")
             with open(script_path, "w", encoding="utf-8") as f:
                 f.write("#!/bin/bash\nset -e\n")
                 f.write(command_raw + "\n")
             os.chmod(script_path, 0o755)
             command = f"bash {script_path}"
-
-        # --- Executa via daemon interno (porta 9001) ---
+            
         r = requests.post("http://127.0.0.1:9001/create_env", data={
             "name": name, "cpu": cpu, "mem": mem, "cmd": command, "log": log_path
         })

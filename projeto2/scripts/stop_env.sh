@@ -1,7 +1,3 @@
-#!/bin/bash
-# stop_env.sh — encerra ambiente isolado e garante liberação da porta
-# Uso: stop_env.sh <nome>
-
 set -euo pipefail
 
 NAME=$1
@@ -23,7 +19,6 @@ LOG_PATH="/home/vagrant/projeto2/logs/${NAME}.log"
   if [[ -d "$CGROUP_PATH" ]]; then
     echo "[i] Matando todos os processos do cgroup $CGROUP_PATH"
 
-    # Lê todos os PIDs dentro do cgroup e mata de forma forçada
     while read -r pid; do
       if [[ -n "$pid" && -d "/proc/$pid" ]]; then
         PROC=$(basename "$(readlink /proc/$pid/exe 2>/dev/null || echo '?')")
@@ -37,7 +32,6 @@ LOG_PATH="/home/vagrant/projeto2/logs/${NAME}.log"
 
     sleep 0.5
 
-    # Verifica novamente se sobrou algo
     REMAIN=$(cat "$CGROUP_PATH/cgroup.procs" 2>/dev/null | wc -l)
     if [[ "$REMAIN" -eq 0 ]]; then
       echo "[✓] Nenhum processo restante no cgroup."
@@ -53,7 +47,6 @@ LOG_PATH="/home/vagrant/projeto2/logs/${NAME}.log"
     echo "[!] Nenhum cgroup encontrado para $NAME"
   fi
 
-  # Mata o wrapper se ainda estiver ativo
   if [[ -n "${ROOT_PID:-}" && -d "/proc/$ROOT_PID" ]]; then
     echo "[i] Matando wrapper $ROOT_PID (fora do namespace)"
     sudo kill -9 "$ROOT_PID" 2>/dev/null || true

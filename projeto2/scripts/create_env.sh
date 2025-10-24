@@ -1,8 +1,3 @@
-#!/bin/bash
-# ==========================================================
-# create_env.sh — Cria ambiente isolado (namespace + cgroup)
-# ==========================================================
-
 set -euo pipefail
 
 NAME="$1"
@@ -26,7 +21,6 @@ echo "[i] $(date '+%Y-%m-%d %H:%M:%S')" | tee -a "$LOG_PATH"
 echo "$CPU 1000000" | sudo tee "$CGROUP_PATH/cpu.max" >/dev/null
 echo $(($MEM * 1024 * 1024)) | sudo tee "$CGROUP_PATH/memory.max" >/dev/null
 
-# --- Lógica de execução real ---
 (
   bash -c "
     echo \$\$ > '$PID_FILE'

@@ -1,7 +1,3 @@
-#!/usr/bin/env python3
-# Serviço Flask que executa create_env.sh / stop_env.sh
-# Roda via systemd como root (para manipular cgroups v2 com segurança).
-
 from flask import Flask, request
 import subprocess, os
 
@@ -35,5 +31,4 @@ def stop_env():
     return "OK", 200
 
 if __name__ == "__main__":
-    # Em dev, pode rodar manual (nohup ...) — em produção, usamos systemd
     app.run(host="127.0.0.1", port=9001)
