@@ -39,6 +39,11 @@
               <a href="/log/{{ e[1] }}" class="btn small blue">📄 Log</a>
               <a href="/restart/{{ e[1] }}" class="btn small blue">🔁</a>
               <a href="/stop/{{ e[1] }}" class="btn small red">🛑</a>
+               <form action="/delete/{{ e[1] }}" method="post" style="display:inline;" onsubmit="return confirmDelete('{{ e[1] }}')">
+                <button type="submit" class="btn small" title="Deletar ambiente" style="background:#dc3545;color:white;border:none;padding:6px 8px;border-radius:5px;">
+                  🗑️
+                </button>
+              </form>
             </td>
           </tr>
           {% endfor %}
@@ -76,7 +81,17 @@ async function atualizarTop() {
 }
 atualizarTop();
 setInterval(atualizarTop, 2000);
+
+// Função de confirmação para o botão de deletar
+function confirmDelete(name) {
+  return confirm(
+    "Tem certeza que deseja deletar o ambiente '" +
+      name +
+      "'? Isso apagará logs e arquivos relacionados."
+  );
+}
 </script>
+
 
 <style>
 .dashboard { padding: 20px; }

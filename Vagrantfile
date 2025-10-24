@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "projeto2"
 
   config.vm.provider "virtualbox" do |vb|
-    vb.name = "projeto2"
+    vb.name = "proj2"
     vb.memory = 4096
     vb.cpus = 2
   end

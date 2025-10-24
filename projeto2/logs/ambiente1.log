@@ -1,0 +1,40 @@
+===== Criando ambiente ambiente1 =====
+[+] CPU=200000 MEM=512MB CMD=bash /home/vagrant/projeto2/scripts/ambiente1_cmd.sh
+[i] 2025-10-24 03:12:32
+[+] Ambiente ambiente1 iniciado com PID 5832
+[+] Log: /home/vagrant/projeto2/logs/ambiente1.log
+============================================
+[i] Executando comando dentro do namespace...
+=== Iniciando test_logger for testlogger ===
+2025-10-24 03:12:32 [INFO] contador=1
+2025-10-24 03:12:33 [INFO] contador=2
+2025-10-24 03:12:34 [INFO] contador=3
+2025-10-24 03:12:35 [INFO] contador=4
+2025-10-24 03:12:36 [INFO] contador=5
+2025-10-24 03:12:37 [INFO] contador=6
+2025-10-24 03:12:38 [INFO] contador=7
+2025-10-24 03:12:39 [INFO] contador=8
+2025-10-24 03:12:40 [INFO] contador=9
+2025-10-24 03:12:41 [INFO] contador=10
+2025-10-24 03:12:41 [ERROR] erro simulado contador=10
+2025-10-24 03:12:42 [INFO] contador=11
+2025-10-24 03:12:43 [INFO] contador=12
+2025-10-24 03:12:44 [INFO] contador=13
+2025-10-24 03:12:45 [INFO] contador=14
+===== Encerrando ambiente ambiente1 =====
+[i] Iniciado em 2025-10-24 03:12:46
+[+] PID wrapper salvo: 5832
+[i] Matando todos os processos do cgroup /sys/fs/cgroup/ambiente1
+  → Matando PID 5832 (bash bash -c 
+    echo $$ > '/tmp/ambiente1.pid'
+    echo $$ | sudo tee '/sys/fs/cgroup/ambiente1/cgroup.procs' >/dev/null
+    echo '[i] Executando comando dentro do namespace...' >> '/home/vagrant/projeto2/logs/ambiente1.log'
+    bash /home/vagrant/projeto2/scripts/ambiente1_cmd.sh >> '/home/vagrant/projeto2/logs/ambiente1.log' 2>&1
+    echo '[✓] Comando finalizado.' >> '/home/vagrant/projeto2/logs/ambiente1.log'
+   )
+2025-10-24 03:12:46 [INFO] contador=15
+  → Matando PID 5922 (sleep sleep 1 )
+Terminated
+[✓] Nenhum processo restante no cgroup.
+[✓] Ambiente ambiente1 completamente encerrado e porta liberada.
+===============================================

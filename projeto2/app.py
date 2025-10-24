@@ -1,6 +1,7 @@
 import os, sqlite3, datetime, traceback, zipfile, unicodedata, re, subprocess
 from flask import Flask, render_template, request, redirect, url_for
 import requests
+import glob
 
 app = Flask(__name__)
 
@@ -119,6 +120,47 @@ def view_log(env_name):
         with open(log_path, "r", encoding="utf-8", errors="ignore") as f:
             return f"<pre>{f.read()}</pre>"
     return "Log não encontrado."
+
+@app.route("/delete/<env_name>", methods=["POST"])
+def delete_env(env_name):
+    try:
+        safe_name = safe_filename(env_name)
+
+        try:
+            r = requests.post("http://127.0.0.1:9001/delete_env", data={"name": safe_name}, timeout=5)
+            if r.status_code != 200:
+                print(f"[WARN] daemon delete_env retornou {r.status_code}: {r.text}")
+        except Exception as e:
+            print(f"[WARN] Falha ao contatar daemon para deletar {safe_name}: {e}")
+
+        log_path = os.path.join(LOG_DIR, f"{safe_name}.log")
+        try:
+            if os.path.exists(log_path):
+                os.remove(log_path)
+                print(f"[INFO] Log removido: {log_path}")
+        except Exception as e:
+            print(f"[WARN] Não foi possível remover log {log_path}: {e}")
+
+        try:
+            pattern = os.path.join(SCRIPT_DIR, f"{safe_name}_*")
+            for f in glob.glob(pattern):
+                try:
+                    os.remove(f)
+                    print(f"[INFO] Script removido: {f}")
+                except Exception as e:
+                    print(f"[WARN] Não foi possível remover script {f}: {e}")
+        except Exception as e:
+            print(f"[WARN] Erro removendo scripts para {safe_name}: {e}")
+
+        try:
+            db_execute("DELETE FROM envs WHERE name = ?", (env_name,))
+            print(f"[INFO] Registro DB removido para: {env_name}")
+        except Exception as e:
+            print(f"[WARN] Falha ao remover registro DB para {env_name}: {e}")
+
+        return redirect(url_for("list_envs"))
+    except Exception:
+        return f"<h3>Erro ao deletar ambiente:</h3><pre>{traceback.format_exc()}</pre>"
 
 @app.route('/top')
 def get_top():

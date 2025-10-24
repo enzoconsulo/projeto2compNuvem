@@ -1,0 +1,25 @@
+===== Criando ambiente ambiente0 =====
+[+] CPU=200000 MEM=512MB CMD=bash /home/vagrant/projeto2/scripts/ambiente0_cmd.sh
+[i] 2025-10-24 03:11:27
+[+] Ambiente ambiente0 iniciado com PID 5708
+[+] Log: /home/vagrant/projeto2/logs/ambiente0.log
+[i] Executando comando dentro do namespace...
+============================================
+mirarable
+[✓] Comando finalizado.
+===== Encerrando ambiente ambiente0 =====
+[i] Iniciado em 2025-10-24 03:12:45
+[+] PID wrapper salvo: 5708
+[i] Matando todos os processos do cgroup /sys/fs/cgroup/ambiente0
+[✓] Nenhum processo restante no cgroup.
+[✓] Ambiente ambiente0 completamente encerrado e porta liberada.
+===============================================
+===== Criando ambiente ambiente0 =====
+[+] CPU=200000 MEM=512MB CMD=bash /home/vagrant/projeto2/scripts/ambiente0_cmd.sh
+[i] 2025-10-24 03:12:48
+[+] Ambiente ambiente0 iniciado com PID 5963
+[+] Log: /home/vagrant/projeto2/logs/ambiente0.log
+[i] Executando comando dentro do namespace...
+============================================
+mirarable
+[✓] Comando finalizado.
