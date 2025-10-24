@@ -1,7 +1,0 @@
-===== Criando ambiente testenv =====
-[+] CPU=200000 MEM=128MB CMD=echo teste_ok
-[i] 2025-10-23 19:39:57
-[+] Ambiente testenv iniciado com PID 5394
-[+] Log: /home/vagrant/projeto2/logs/testenv.log
-============================================
-teste_ok

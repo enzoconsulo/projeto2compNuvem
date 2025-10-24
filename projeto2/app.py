@@ -86,8 +86,16 @@ def create():
 
         # --- Caso 2: comando manual ---
         else:
-            command = request.form.get("command", "").replace("\r", "").strip()
-            command = "; ".join([ln for ln in command.split("\n") if ln.strip()])
+            command_raw = request.form.get("command", "").strip()
+            command_raw = command_raw.replace("\r", "")  # 🔧 remove quebras de linha do Windows
+
+            # Salva o comando num script temporário no diretório scripts/
+            script_path = os.path.join(SCRIPT_DIR, f"{safe_filename(name)}_cmd.sh")
+            with open(script_path, "w", encoding="utf-8") as f:
+                f.write("#!/bin/bash\nset -e\n")
+                f.write(command_raw + "\n")
+            os.chmod(script_path, 0o755)
+            command = f"bash {script_path}"
 
         # --- Executa via daemon interno (porta 9001) ---
         r = requests.post("http://127.0.0.1:9001/create_env", data={

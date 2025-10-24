@@ -1,0 +1,78 @@
+===== Criando ambiente teste1 =====
+[+] CPU=200000 MEM=512MB CMD=for i in $(seq 1 10); do echo "Ambiente 1 — Iteração $i"; sleep 1; done
+[i] 2025-10-24 00:05:08
+[+] Ambiente teste1 iniciado com PID 6910
+[+] Log: /home/vagrant/projeto2/logs/teste1.log
+[i] Executando comando dentro do namespace...
+============================================
+Ambiente 1 — Iteração 1
+Ambiente 1 — Iteração 2
+Ambiente 1 — Iteração 3
+Ambiente 1 — Iteração 4
+Ambiente 1 — Iteração 5
+Ambiente 1 — Iteração 6
+Ambiente 1 — Iteração 7
+Ambiente 1 — Iteração 8
+Ambiente 1 — Iteração 9
+Ambiente 1 — Iteração 10
+[✓] Comando finalizado.
+===== Encerrando ambiente teste1 =====
+[i] Iniciado em 2025-10-24 00:18:27
+[+] PID wrapper salvo: 6910
+[i] Matando todos os processos do cgroup /sys/fs/cgroup/teste1
+[✓] Nenhum processo restante no cgroup.
+[✓] Ambiente teste1 completamente encerrado e porta liberada.
+===============================================
+===== Criando ambiente teste1 =====
+[+] CPU=200000 MEM=512MB CMD=for i in $(seq 1 10); do echo "Ambiente 1 — Iteração $i"; sleep 1; done
+[i] 2025-10-24 00:34:46
+[+] Ambiente teste1 iniciado com PID 14120
+[+] Log: /home/vagrant/projeto2/logs/teste1.log
+============================================
+[i] Executando comando dentro do namespace...
+===== Criando ambiente teste1 =====
+[+] CPU=200000 MEM=512MB CMD=for i in $(seq 1 10); do echo "Ambiente 1 — Iteração $i"; sleep 1; done
+[i] 2025-10-24 00:34:55
+[+] Ambiente teste1 iniciado com PID 14166
+[+] Log: /home/vagrant/projeto2/logs/teste1.log
+============================================
+[i] Executando comando dentro do namespace...
+===== Criando ambiente teste1 =====
+[+] CPU=200000 MEM=512MB CMD=for i in $(seq 1 10); do echo "Ambiente 1 — Iteração $i"; sleep 1; done
+[i] 2025-10-24 00:35:00
+[+] Ambiente teste1 iniciado com PID 14212
+[+] Log: /home/vagrant/projeto2/logs/teste1.log
+============================================
+[i] Executando comando dentro do namespace...
+===== Criando ambiente teste1 =====
+[+] CPU=200000 MEM=512MB CMD=for i in $(seq 1 10); do echo "Ambiente 1 — Iteração $i"; sleep 1; done
+[i] 2025-10-24 00:35:03
+[+] Ambiente teste1 iniciado com PID 14245
+[+] Log: /home/vagrant/projeto2/logs/teste1.log
+============================================
+[i] Executando comando dentro do namespace...
+===== Criando ambiente teste1 =====
+[+] CPU=200000 MEM=512MB CMD=for i in $(seq 1 10); do echo "Ambiente 1 — Iteração $i"; sleep 1; done
+[i] 2025-10-24 00:35:55
+[+] Ambiente teste1 iniciado com PID 14992
+[+] Log: /home/vagrant/projeto2/logs/teste1.log
+[i] Executando comando dentro do namespace...
+============================================
+Ambiente 1 — Iteração 1
+Ambiente 1 — Iteração 2
+Ambiente 1 — Iteração 3
+Ambiente 1 — Iteração 4
+Ambiente 1 — Iteração 5
+Ambiente 1 — Iteração 6
+Ambiente 1 — Iteração 7
+Ambiente 1 — Iteração 8
+Ambiente 1 — Iteração 9
+Ambiente 1 — Iteração 10
+[✓] Comando finalizado.
+===== Encerrando ambiente teste1 =====
+[i] Iniciado em 2025-10-24 00:36:55
+[+] PID wrapper salvo: 14992
+[i] Matando todos os processos do cgroup /sys/fs/cgroup/teste1
+[✓] Nenhum processo restante no cgroup.
+[✓] Ambiente teste1 completamente encerrado e porta liberada.
+===============================================

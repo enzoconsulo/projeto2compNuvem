@@ -26,8 +26,17 @@
 
     <div class="form-group">
       <label>Comando(s) a executar</label>
-      <textarea name="command" rows="4" placeholder="echo 'Hello'; sleep 3; echo 'Fim'"></textarea>
+      <textarea name="command" rows="10" spellcheck="false"
+                style="font-family: monospace; background:#111; color:#0f0; border-radius:6px; padding:10px;"
+                placeholder="# Escreva aqui comandos shell, loops, etc.
+        for i in $(seq 1 5)
+        do
+          echo \"Etapa $i\"
+          sleep 1
+        done
+        echo \"Finalizado!\""></textarea>
     </div>
+
 
     <div class="divider"><span>ou</span></div>
 
